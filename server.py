@@ -1,9 +1,8 @@
 from flask import Flask
 from flask import render_template
-
+import subprocess
 #some random imports
-import logging, json, importio, latch
-
+import json
 app = Flask(__name__)
 global dataRows
 
@@ -21,4 +20,5 @@ def songlist():
 
 
 if __name__ == "__main__":
+	subprocess.call(["python worker.py"], shell=True)
 	app.run(debug=True)

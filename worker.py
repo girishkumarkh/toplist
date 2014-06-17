@@ -1,3 +1,6 @@
+import sched, time
+import logging, json, importio, latch
+
 def getchart():
 	# To use an API key for authentication, use the following code:
 	client = importio.importio(user_id="877a94b9-5a3d-4868-bcf7-85bd0e150f96", api_key="4Sj5laBSBEiPLJCJl3aFxnezKVy3/8UOJoOMJuhx+gU2iYe5GhYRgWTDXtL/WN3dyB80xynC0WmDvJO5v5KKeQ==", host="https://query.import.io")
@@ -159,10 +162,10 @@ def getchart():
 	#print json.dumps(dataRows, indent = 4)
 	with open('data.txt', 'w') as outfile:
   		json.dump(dataRows, outfile)
-  	s.enter(30, 1, getchart, ())
-  	s.run()
+  	# s.enter(30, 1, getchart, ())
+  	# s.run()
 
 
 if __name__ == "__main__":
-	s = sched.scheduler(time.time, time.sleep)
+	# s = sched.scheduler(time.time, time.sleep)
 	getchart()
