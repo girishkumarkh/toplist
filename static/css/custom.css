@@ -3,15 +3,43 @@
         
 }
 
-.video {
-      padding-top: 95px;
-      border-radius: 6px;
+#footer1 {
+    position: absolute;
+    bottom:0px;
+    width: inherit;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    margin-bottom: 25px;
+    background-color: #f5f5f5;
 }
 
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
+#footer2 {
+    position: relative;
+    bottom:0px;
+    width: inherit;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    margin-bottom: 25px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container2 {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container2 .text-muted {
+  margin: 20px 0;
+}
+.row { 
+    margin-right: 5px;
+    margin-left: 5px;
 }
 .samples {
-    margin-bottom: 46px
+    margin-bottom: 46px;
 }

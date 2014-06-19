@@ -1,6 +1,39 @@
 import sched, time
 import logging, json, importio, latch
 
+# Request #
+import requests
+
+# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
+# tab of
+#   https://cloud.google.com/console
+# Please ensure that you have enabled the YouTube Data API for your project.
+DEVELOPER_KEY = "AIzaSyB-kggO5cg8psVRpAJ2Yv73AJDlTwyCoSo"
+
+
+
+def youtube_search(options):
+  payload = {'part':'snippet', 'q':options["q"], 'maxResults':options["maxResults"], 'key':DEVELOPER_KEY}
+  r = requests.get("https://www.googleapis.com/youtube/v3/search", params=payload)
+  
+  videos = []
+  channels = []
+  playlists = []
+  
+
+  # Add each result to the appropriate list, and then display the lists of
+  # matching videos, channels, and playlists.
+  for search_result in r.json().get("items", []):
+    if search_result["id"]["kind"] == "youtube#video":
+    	return search_result["id"]["videoId"]
+      #videos.append("%s (%s)" % (search_result["snippet"]["title"],
+                                 #search_result["id"]["videoId"]))
+      #playlist_dump=playlist_dump.append(join(videos))
+  #with open('playlist.json', 'w') as outfile:
+  	#json.dump(playlist_dump, outfile)
+
+
+global dataRows
 def getchart():
 	# To use an API key for authentication, use the following code:
 	client = importio.importio(user_id="877a94b9-5a3d-4868-bcf7-85bd0e150f96", api_key="4Sj5laBSBEiPLJCJl3aFxnezKVy3/8UOJoOMJuhx+gU2iYe5GhYRgWTDXtL/WN3dyB80xynC0WmDvJO5v5KKeQ==", host="https://query.import.io")
@@ -160,10 +193,26 @@ def getchart():
 	# Now we can print out the data we got
 	print "All data received and saved into json file"
 	#print json.dumps(dataRows, indent = 4)
-	with open('data.txt', 'w') as outfile:
-  		json.dump(dataRows, outfile)
+	
+	#not req to use json 
+	#with open('data.json', 'w') as outfile:
+  	#	json.dump(dataRows, outfile)
+  	
   	# s.enter(30, 1, getchart, ())
   	# s.run()
+
+  	#not req to use json 
+  	#with open("data.json") as json_file:
+	#	json_data = json.load(json_file)
+	playlistid=[]
+	for item in dataRows:	
+		query = youtube_search({"q":item["song_name"]+item["artist"],"maxResults":"1"})
+		if query:
+			playlistid.append(query)
+			print "VideoID id added"
+	
+	with open('playlist.json', 'w') as outfile:
+  		json.dump(playlistid, outfile)
 
 
 if __name__ == "__main__":
