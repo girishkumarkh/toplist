@@ -1,7 +1,7 @@
 import os
 from flask import Flask
-from flask import render_template
-import subprocess
+from flask import render_template, jsonify
+# import subprocess
 #some random imports
 import json
 
@@ -21,7 +21,14 @@ def songlist():
 		json_data = json.load(json_file)
 	return render_template('songlist.html', data=json_data)
 
+@app.route("/api/toplist")
+def api():
+	with open("playlist.json") as json_file:
+		json_data = json.load(json_file)
+	return jsonify(data=json_data)
+
+
 if __name__ == "__main__":
 	# subprocess.call(["python worker.py"], shell=True)
 	port = int(os.environ.get("PORT",5000))
-	app.run(host='0.0.0.0', port=port)
+	app.run(host='0.0.0.0', port=port, debug=True)

@@ -198,7 +198,7 @@ def getchart():
 	#	json_data = json.load(json_file)
 	playlistid=[]
 	for item in dataRows:	
-		query = youtube_search({"q":item["song_name"]+item["artist"],"maxResults":"1"})
+		query = youtube_search({"q":"%s %s" %(item["song_name"],item["artist"]),"maxResults":"1"})
 		if query:
 			playlistid.append(query)
 			# print "VideoID id added"
