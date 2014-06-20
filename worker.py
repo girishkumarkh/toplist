@@ -4,13 +4,8 @@ import logging, json, importio, latch
 # Request #
 import requests
 
-# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
-# tab of
-#   https://cloud.google.com/console
-# Please ensure that you have enabled the YouTube Data API for your project.
+# Google API Key #
 DEVELOPER_KEY = "AIzaSyB-kggO5cg8psVRpAJ2Yv73AJDlTwyCoSo"
-
-
 
 def youtube_search(options):
   payload = {'part':'snippet', 'q':options["q"], 'maxResults':options["maxResults"], 'key':DEVELOPER_KEY}
@@ -195,11 +190,11 @@ def getchart():
 	#print json.dumps(dataRows, indent = 4)
 	
 	#not req to use json 
-	#with open('data.json', 'w') as outfile:
-  	#	json.dump(dataRows, outfile)
+	with open('data.json', 'w') as outfile:
+  		json.dump(dataRows, outfile)
   	
-  	# s.enter(30, 1, getchart, ())
-  	# s.run()
+  	s.enter(86400, 1, getchart, ())
+  	s.run()
 
   	#not req to use json 
   	#with open("data.json") as json_file:
@@ -216,5 +211,5 @@ def getchart():
 
 
 if __name__ == "__main__":
-	# s = sched.scheduler(time.time, time.sleep)
+	s = sched.scheduler(time.time, time.sleep)
 	getchart()

@@ -9,8 +9,30 @@
 {% block content %} 
 <div class="row">
   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+  <div class="video-container">
   <div id="player"></div>
+  </div>
   <script>
+  var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+    };
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -35,8 +57,11 @@
     }
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
-      event.target.playVideo();
-
+      if(isMobile.any()){
+        // Mobile!
+      } else {
+        event.target.playVideo();
+      }
     }
 
     // 5. The API calls this function when the player's state changes.
@@ -52,9 +77,11 @@
   </script>
       
 </div><!-- /row samples -->
+<!--
 <div id="footer1">
         <div class="container2">
           <p class="text-muted">Place sticky footer content here.</p>
         </div>
       </div>
+    -->
 {% endblock %}

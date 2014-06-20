@@ -5,12 +5,6 @@ import subprocess
 import json
 app = Flask(__name__)
 
-
-
-
-
-
-
 @app.route("/")
 def home():
 	with open("playlist.json") as json_file:
@@ -28,4 +22,4 @@ def songlist():
 
 if __name__ == "__main__":
 	# subprocess.call(["python worker.py"], shell=True)
-	app.run(debug=True)
+	app.run(host='0.0.0.0', port=5000, debug=True)

@@ -23,11 +23,6 @@
     background-color: #f5f5f5;
 }
 
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
 .container2 {
   width: auto;
   max-width: 680px;
@@ -43,3 +38,27 @@
 .samples {
     margin-bottom: 46px;
 }
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+.player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+- See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.nbczg0Ap.dpuf
