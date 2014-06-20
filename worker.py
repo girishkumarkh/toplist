@@ -193,8 +193,8 @@ def getchart():
 	with open('data.json', 'w') as outfile:
   		json.dump(dataRows, outfile)
   	
-  	s.enter(86400, 1, getchart, ())
-  	s.run()
+  	#s.enter(86400, 1, getchart, ())
+  	#s.run()
 
   	#not req to use json 
   	#with open("data.json") as json_file:
@@ -211,5 +211,5 @@ def getchart():
 
 
 if __name__ == "__main__":
-	s = sched.scheduler(time.time, time.sleep)
+	#s = sched.scheduler(time.time, time.sleep)
 	getchart()

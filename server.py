@@ -17,8 +17,7 @@ def home():
 def songlist():
 	with open("data.json") as json_file:
 		json_data = json.load(json_file)
-	return render_template('songlist.html', data=json_data) 
-
+	return render_template('songlist.html', data=json_data)
 
 if __name__ == "__main__":
 	# subprocess.call(["python worker.py"], shell=True)
