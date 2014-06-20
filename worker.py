@@ -204,7 +204,7 @@ def getchart():
 		query = youtube_search({"q":item["song_name"]+item["artist"],"maxResults":"1"})
 		if query:
 			playlistid.append(query)
-			print "VideoID id added"
+			# print "VideoID id added"
 	
 	with open('playlist.json', 'w') as outfile:
   		json.dump(playlistid, outfile)
