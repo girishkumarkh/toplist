@@ -193,9 +193,6 @@ def getchart():
 	with open('data.json', 'w') as outfile:
   		json.dump(dataRows, outfile)
   	
-  	s.enter(30, 1, getchart, ()) #86400
-  	s.run()
-
   	#not req to use json 
   	#with open("data.json") as json_file:
 	#	json_data = json.load(json_file)
@@ -210,6 +207,8 @@ def getchart():
 	with open('playlist.json', 'w') as outfile:
   		json.dump(playlistid, outfile)
 
+  	s.enter(30, 1, getchart, ()) #86400
+  	s.run()
 
 if __name__ == "__main__":
 	s = sched.scheduler(time.time, time.sleep)
