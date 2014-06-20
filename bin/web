@@ -1,2 +1,2 @@
-python worker.py &
-python server.py
+python server.py &
+python worker.py
