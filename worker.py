@@ -207,7 +207,7 @@ def getchart():
 	with open('playlist.json', 'w') as outfile:
   		json.dump(playlistid, outfile)
 
-  	s.enter(30, 1, getchart, ()) #86400
+  	s.enter(21600, 1, getchart, ()) #86400 #43200 21600
   	s.run()
 
 if __name__ == "__main__":
