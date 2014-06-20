@@ -21,4 +21,4 @@ def songlist():
 
 if __name__ == "__main__":
 	# subprocess.call(["python worker.py"], shell=True)
-	app.run(host='0.0.0.0', port=5000, debug=True)
+	app.run()
