@@ -11,8 +11,9 @@ app = Flask(__name__)
 def home():
 	with open("playlist.json") as json_file:
 		json_data = json.load(json_file)
-	first = json_data.pop(0)
-	rest = (',').join(json_data)
+	first = json_data.pop(0)["id"]["videoId"]
+	othervideo = [item["id"]["videoId"] for item in json_data]
+	rest = (',').join(othervideo)
 	return render_template('home.html', first=first, data=rest)  
 
 @app.route("/songlist")

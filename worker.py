@@ -20,10 +20,8 @@ def youtube_search(options):
   # matching videos, channels, and playlists.
   for search_result in r.json().get("items", []):
     if search_result["id"]["kind"] == "youtube#video":
-    	return search_result["id"]["videoId"]
-      #videos.append("%s (%s)" % (search_result["snippet"]["title"],
-                                 #search_result["id"]["videoId"]))
-      #playlist_dump=playlist_dump.append(join(videos))
+    	return search_result
+    	# return {"title":search_result["snippet"]["title"], "videoID":search_result["id"]["videoId"], "albumArt":search_result["snippet"]["thumbnails"]["medium"]["url"], "channel":search_result["snippet"]["channelTitle"]}
   #with open('playlist.json', 'w') as outfile:
   	#json.dump(playlist_dump, outfile)
 
@@ -54,7 +52,7 @@ def getchart():
 	  # Disconnect messages happen if we disconnect the client library while a query is in progress
 	  if message["type"] == "DISCONNECT":
 		print "Query in progress when library disconnected"
-		#print json.dumps(message["data"], indent = 4)
+		print json.dumps(message["data"], indent = 4)
 
 	  # Check the message we receive actually has some data in it
 	  if message["type"] == "MESSAGE":
@@ -64,8 +62,8 @@ def getchart():
 		  print json.dumps(message["data"], indent = 4)
 		else:
 		  # We got a message and it was not an error, so we can process the data
-		  print "Got data!"
-		  #print json.dumps(message["data"], indent = 4)
+		  # print "Got data!"
+		  # print json.dumps(message["data"], indent = 4)
 		  # Save the data we got in our dataRows variable for later
 		  dataRows.extend(message["data"]["results"])
 
@@ -174,28 +172,25 @@ def getchart():
 	  }
 	}, callback)
 
-	print "Queries dispatched, now waiting for results"
+	# print "Queries dispatched, now waiting for results"
 
 	# Now we have issued all of the queries, we can "await" on the latch so that we know when it is all done
 	queryLatch.await()
 
-	print "Latch has completed, all results returned"
+	# print "Latch has completed, all results returned"
 
 	# It is best practice to disconnect when you are finished sending queries and getting data - it allows us to
 	# clean up resources on the client and the server
 	client.disconnect()
 
 	# Now we can print out the data we got
-	print "All data received and saved into json file"
+	# print "All data received and saved into json file"
 	#print json.dumps(dataRows, indent = 4)
 	
-	#not req to use json 
 	with open('data.json', 'w') as outfile:
   		json.dump(dataRows, outfile)
+  	print "data.JSON file is extracted"
   	
-  	#not req to use json 
-  	#with open("data.json") as json_file:
-	#	json_data = json.load(json_file)
 	playlistid=[]
 	for item in dataRows:	
 		query = youtube_search({"q":"%s %s" %(item["song_name"],item["artist"]),"maxResults":"1"})
