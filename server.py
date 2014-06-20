@@ -1,8 +1,10 @@
+import os
 from flask import Flask
 from flask import render_template
 import subprocess
 #some random imports
 import json
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -21,4 +23,5 @@ def songlist():
 
 if __name__ == "__main__":
 	# subprocess.call(["python worker.py"], shell=True)
-	app.run()
+	port = int(os.environ.get("PORT",5000))
+	app.run(host='0.0.0.0', port=port)
