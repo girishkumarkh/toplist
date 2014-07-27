@@ -1,1 +1,1 @@
-web: sh target/bin/web
+web: sh xbin/web
