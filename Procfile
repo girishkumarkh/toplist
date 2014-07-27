@@ -1,1 +1,1 @@
-web: sh xbin/web
+web: sh bin/web
