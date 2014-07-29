@@ -202,6 +202,7 @@ def getchart():
 	with open('playlist.json', 'w') as outfile:
   		json.dump(playlistid, outfile)
 
+  	del dataRows[0:len(dataRows)]
   	s.enter(21600, 1, getchart, ()) #86400 #43200 21600
   	s.run()
 
