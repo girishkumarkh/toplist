@@ -185,7 +185,7 @@ def getchart():
 
 	# Now we can print out the data we got
 	# print "All data received and saved into json file"
-	#print json.dumps(dataRows, indent = 4)
+	# print json.dumps(dataRows, indent = 4)
 	
 	with open('data.json', 'w') as outfile:
   		json.dump(dataRows, outfile)
