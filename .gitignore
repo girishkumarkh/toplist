@@ -29,3 +29,5 @@ Thumbs.db
 *.swo
 *.swp
 *.swn
+venv
+*.pyc
