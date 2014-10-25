@@ -14,25 +14,47 @@ def youtube_search(options):
 
 def getchart():
 	dataRows = []
-	for page in range(0,10):
-		if (page == 0):
-			r = requests.get("http://www.billboard.com/charts/hot-100")
+	r = requests.get("http://www.billboard.com/charts/hot-100")
+	html = r.text
+	soup = BeautifulSoup(html)
+	list_of_songs = soup.find_all('article', class_='chart-row')
+	print len(list_of_songs)
+	for each_article in list_of_songs:
+		spans = each_article.select("span.this-week")[0].string
+		print spans
+		rank = spans # Rank
+		song_name = each_article.h2.string.strip() # Song name
+		if (each_article.h3.a):
+			artist = each_article.h3.a.string.strip() # Artist name
 		else:
-			payload = {'page': page}
-			r = requests.get("http://www.billboard.com/charts/hot-100", params=payload)
-		html = r.text
-		soup = BeautifulSoup(html)
-		list_of_songs = soup.find_all('article')
-		for song in range(0,10):
-			rank = list_of_songs[song].span.string #Rank
-			song_name = list_of_songs[song].h1.string.strip() # Song name
-			if (list_of_songs[song].p.a):
-				artist = list_of_songs[song].p.a.string # Artist name
-			else:
-				artist = list_of_songs[song].p.string # Artist name
-			album = list_of_songs[song].p.br.string.strip() # Album name
-			dic = {'rank': rank, 'song_name': song_name,'artist': artist,'album': album}
-			dataRows.append(dic)
+			artist = each_article.h3.string.strip() # Artist name
+		# album = 'no album' # Album name
+		dic = { 'rank': rank, 
+				'song_name': song_name,
+				'artist': artist
+				# 'album' : album
+		}
+		dataRows.append(dic)
+	# Old billboard
+	# for page in range(0,10):
+	# 	if (page == 0):
+	# 		r = requests.get("http://www.billboard.com/charts/hot-100")
+	# 	else:
+	# 		payload = {'page': page}
+	# 		r = requests.get("http://www.billboard.com/charts/hot-100", params=payload)
+	# 	html = r.text
+	# 	soup = BeautifulSoup(html)
+	# 	list_of_songs = soup.find_all('article')
+	# 	for song in range(0,10):
+	# 		rank = list_of_songs[song].span.string #Rank
+	# 		song_name = list_of_songs[song].h1.string.strip() # Song name
+	# 		if (list_of_songs[song].p.a):
+	# 			artist = list_of_songs[song].p.a.string # Artist name
+	# 		else:
+	# 			artist = list_of_songs[song].p.string # Artist name
+	# 		album = list_of_songs[song].p.br.string.strip() # Album name
+	# 		dic = {'rank': rank, 'song_name': song_name,'artist': artist,'album': album}
+	# 		dataRows.append(dic)
 
 	with open('data.json', 'w') as outfile:
 		json.dump(dataRows, outfile)
