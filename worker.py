@@ -20,9 +20,7 @@ def getchart():
 	list_of_songs = soup.find_all('article', class_='chart-row')
 	print len(list_of_songs)
 	for each_article in list_of_songs:
-		spans = each_article.select("span.this-week")[0].string
-		print spans
-		rank = spans # Rank
+		rank = each_article.select("span.this-week")[0].string # Rank
 		song_name = each_article.h2.string.strip() # Song name
 		if (each_article.h3.a):
 			artist = each_article.h3.a.string.strip() # Artist name
