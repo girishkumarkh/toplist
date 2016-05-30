@@ -1,51 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  	{% block head %}
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Loading Bootstrap -->
-    
-    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <!-- Loading Bootstrap -->
+        <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <!-- Loading Flat UI -->
+        <link href="{{ url_for('static', filename='css/flat-ui.css') }}" rel="stylesheet">
+        <!-- Loading Custom CSS -->
+        <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
-    <!-- Loading Flat UI -->
-    <link href="{{ url_for('static', filename='css/flat-ui.css') }}" rel="stylesheet">
-    
-    <!-- Loading Custom CSS -->
-    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
-    <![endif]-->
-   {% endblock %}
-  </head>
-  <body>
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+          <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+          <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+<body>
     <div class="container">
         <div class="header">
-        <!-- Nav bar-->
-        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
-             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-                <span class="sr-only">Toggle navigation</span>
-              </button>
-              <a class="navbar-brand" href="/">toplist</a>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar-collapse-01" style="height: auto;">
-              <ul class="nav navbar-nav"> 
-                {% block nav %} {% endblock %}
-              </ul>          
-            </div><!-- /.navbar-collapse -->
-          </nav><!-- /navbar -->
+            <!-- Nav bar-->
+            <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                        <span class="sr-only">Toggle navigation</span>
+                    </button>
+                    <a class="navbar-brand" href="/">toplist</a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-collapse-01" style="height: auto;">
+                    <ul class="nav navbar-nav"> 
+                        {% block nav %} {% endblock %}
+                    </ul>          
+                </div><!-- /.navbar-collapse -->
+            </nav><!-- /navbar -->
       	</div><!-- /header -->
-      	{% block content %} {% endblock %}
+        {% block content %} {% endblock %}
     </div><!-- /.container -->
-      
     <!-- Load JS here for greater good =============================-->
     <!-- Google analytics-->
     <script>
@@ -56,7 +51,6 @@
 
       ga('create', 'UA-56057491-1', 'auto');
       ga('send', 'pageview');
-
     </script>
     <script src="{{ url_for('static', filename='js/jquery-1.8.3.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
@@ -69,5 +63,5 @@
     <script src="{{ url_for('static', filename='js/jquery.tagsinput.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.placeholder.js') }}"></script>
     <script src="{{ url_for('static', filename='js/video.js') }}"></script>
-  </body>
+</body>
 </html>

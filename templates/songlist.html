@@ -1,37 +1,33 @@
 {% extends "base.html" %}
+
 {% block title %}Toplist - Songlist{% endblock %}
 
 {% block nav %}
-<li><a href="/">Top 100</a></li>
-<li class="active"><a href="/songlist">Song List</a></li>
+	<li><a href="/">Top 100</a></li>
+	<li class="active"><a href="/songlist">Song List</a></li>
 {% endblock %}
 
 {% block content %} 
-<div class="row">
-	<table class="table">
-	  <thead>
-		<tr>
-		  <th>#</th>
-		  <th>Album</th>
-		  <th>Song Name</th>
-		  <th>Artist</th>
-		</tr>
-	  </thead>
-	  <tbody>
-	  {% for entry in data %}
-		<tr>
-		  <td>{{ loop.index }}</td>
-		  <td>{{ entry.album }}</td>
-		  <td>{{ entry.song_name }}</td>
-		  <td>{{ entry.artist }}</td>
-		</tr>
-		{% endfor %}
-	  </tbody>
-	</table>
-</div>
-<!--<div id="footer2">
-        <div class="container2">
-          <p class="text-muted">Place sticky footer content here.</p>
-        </div>
-      </div> -->
+	<div class="row">
+		<table class="table">
+		  	<thead>
+				<tr>
+			  		<th>#</th>
+			  		<th>Album</th>
+			  		<th>Song Name</th>
+			  		<th>Artist</th>
+				</tr>
+		  	</thead>
+		  	<tbody>
+		  		{% for entry in data %}
+					<tr>
+			  			<td>{{ loop.index }}</td>
+			  			<td>{{ entry.album }}</td>
+			  			<td>{{ entry.song_name }}</td>
+			  			<td>{{ entry.artist }}</td>
+					</tr>
+				{% endfor %}
+		  	</tbody>
+		</table>
+	</div>
 {% endblock %}
