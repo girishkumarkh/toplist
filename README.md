@@ -7,4 +7,4 @@ Billboard topcharts player, plays topsongs from youtube.
 
 Here is the link :
 
-http://girishtoplist.herokuapp.com
+http://paperlist.co
