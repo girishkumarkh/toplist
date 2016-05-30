@@ -80,5 +80,5 @@ def api():
 
 if __name__ == "__main__":
     host = os.environ.get('HOST', 'localhost')
-    port = os.environ.get('PORT', 8000)
+    port = int(os.environ.get('PORT', 8000))
     app.run(host=host, port=port, debug=True)
