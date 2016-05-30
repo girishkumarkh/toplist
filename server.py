@@ -5,7 +5,7 @@ from flask import render_template, jsonify
 # some random imports
 import json
 from datetime import timedelta
-from flask import make_response, request, current_app
+from flask import make_response, request, current_app, abort, request
 from functools import update_wrapper
 
 app = Flask(__name__)
@@ -51,6 +51,14 @@ def crossdomain(origin=None, methods=None, headers=None,
         f.provide_automatic_options = False
         return update_wrapper(wrapped_function, f)
     return decorator
+
+
+ALLOW_HOSTS = ['*.herokuapp.com']
+
+@app.before_request
+def limit_remote_addr():
+    if request.remote_addr in ALLOW_HOSTS:
+        abort(403)  # Forbidden
 
 
 @app.route("/")
