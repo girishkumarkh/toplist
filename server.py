@@ -58,6 +58,9 @@ ALLOW_HOSTS = ['*.paperlist.co', 'www.paperlist.co']
 
 @app.before_request
 def limit_remote_addr():
+    print str(request.remote_addr)
+    print ALLOW_HOSTS
+    print str(request.remote_addr) not in ALLOW_HOSTS
     if str(request.remote_addr) not in ALLOW_HOSTS:
         abort(403)  # Forbidden
 
