@@ -53,11 +53,12 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 
-ALLOW_HOSTS = ['www.paperlist.co']
+ALLOW_HOSTS = ['*.paperlist.co', 'www.paperlist.co']
+
 
 @app.before_request
 def limit_remote_addr():
-    if request.remote_addr in ALLOW_HOSTS:
+    if str(request.remote_addr) not in ALLOW_HOSTS:
         abort(403)  # Forbidden
 
 
