@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Toplist - Songlist{% endblock %}
+{% block title %}paperlist - Songlist{% endblock %}
 
 {% block nav %}
 	<li><a href="/">Top 100</a></li>
@@ -13,7 +13,7 @@
 		  	<thead>
 				<tr>
 			  		<th>#</th>
-			  		<th>Album</th>
+			  		{# <th>Album</th> #}
 			  		<th>Song Name</th>
 			  		<th>Artist</th>
 				</tr>
@@ -22,7 +22,7 @@
 		  		{% for entry in data %}
 					<tr>
 			  			<td>{{ loop.index }}</td>
-			  			<td>{{ entry.album }}</td>
+			  			{# <td>{{ entry.album }}</td> #}
 			  			<td>{{ entry.song_name }}</td>
 			  			<td>{{ entry.artist }}</td>
 					</tr>

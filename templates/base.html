@@ -5,7 +5,8 @@
         <meta charset="utf-8">
         <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <meta name="robots" content="index,follow">
+        <meta name="description" content="Dynamically curated top 100 trending songs in one youtube playlist, refreshed every 30 minutes">
         <!-- Loading Bootstrap -->
         <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
         <!-- Loading Flat UI -->
@@ -16,13 +17,14 @@
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
         <!--[if lt IE 9]>
-          <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
-          <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
         <![endif]-->
     {% endblock %}
 </head>
 <body>
     <div class="container">
+        <div class="col-lg-10 col-lg-offset-1">
         <div class="header">
             <!-- Nav bar-->
             <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
@@ -30,7 +32,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-                    <a class="navbar-brand" href="/">toplist</a>
+                    <a class="navbar-brand" href="/">paperlist</a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-collapse-01" style="height: auto;">
                     <ul class="nav navbar-nav"> 
@@ -38,9 +40,27 @@
                     </ul>          
                 </div><!-- /.navbar-collapse -->
             </nav><!-- /navbar -->
-      	</div><!-- /header -->
+        </div><!-- /header -->
         {% block content %} {% endblock %}
+        </div>
     </div><!-- /.container -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h3 class="footer-title">Subscribe</h3>
+                    <p>Do you like this top 100 youtube playlist?<br/>
+                    New version of this is coming soon!<br/>
+                    </p>
+                    <p class="pvl">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://paperlist.co" data-text="Check out Top 100 HD youtube playlist!" data-via="girishkumarkh">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Load JS here for greater good =============================-->
     <!-- Google analytics-->
     <script>
