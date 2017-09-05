@@ -28,10 +28,10 @@ def getchart():
     for each_article in list_of_songs:
         rank = each_article.select("span.chart-row__current-week")[0].string  # Rank
         song_name = each_article.h2.string.strip()  # Song name
-        if (each_article.select("span.chart-row__artist")):
+        if (each_article.select("a.chart-row__artist")):
+            artist = each_article.select("a.chart-row__artist")[0].string.strip()  # Artist name
+        else:
             artist = each_article.select("span.chart-row__artist")[0].string.strip()  # Artist name
-        # else:
-            # artist = each_article.h3.string.strip()  # Artist name
         # album = 'no album' # Album name
         dic = {
             'rank': rank,
