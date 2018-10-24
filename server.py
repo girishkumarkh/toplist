@@ -16,9 +16,9 @@ def crossdomain(origin=None, methods=None, headers=None,
                 automatic_options=True):
     if methods is not None:
         methods = ', '.join(sorted(x.upper() for x in methods))
-    if headers is not None and not isinstance(headers, basestring):
+    if headers is not None and not isinstance(headers, (str, bytes)):
         headers = ', '.join(x.upper() for x in headers)
-    if not isinstance(origin, basestring):
+    if not isinstance(origin, (str, bytes)):
         origin = ', '.join(origin)
     if isinstance(max_age, timedelta):
         max_age = max_age.total_seconds()
@@ -53,12 +53,12 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 
-ALLOW_HOSTS = ['paperlist.co', 'www.paperlist.co']
+ALLOW_HOSTS = ['paperlist.co', ]
 
 
 @app.before_request
 def limit_remote_addr():
-    from urlparse import urlparse
+    from urllib.parse import urlparse
     parsed_uri = urlparse(request.url)
     domain = '{uri.netloc}'.format(uri=parsed_uri)
     if domain not in ALLOW_HOSTS:

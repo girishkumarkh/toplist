@@ -23,36 +23,47 @@ def getchart():
     r = requests.get("http://www.billboard.com/charts/hot-100")
     html = r.text
     soup = BeautifulSoup(html, "html.parser")
-    list_of_songs = soup.find_all('article', class_='chart-row')
-    print "{} items scraped".format(len(list_of_songs))
-    for each_article in list_of_songs:
-        rank = each_article.select("span.chart-row__current-week")[0].string  # Rank
-        song_name = each_article.h2.string.strip()  # Song name
-        if (each_article.select("a.chart-row__artist")):
-            artist = each_article.select("a.chart-row__artist")[0].string.strip()  # Artist name
+
+    # ==== Get First Song =====
+    first_song = soup.find('div', class_='chart-number-one__info')
+    first_dic = {
+        'rank': 1,
+        'song_name': first_song.select("div.chart-number-one__title")[0].string.strip(),
+        'artist': first_song.select("div.chart-number-one__artist")[0].string.strip()
+    }
+    dataRows.append(first_dic)
+
+    # ==== Get Next 99 Songs =====
+    list_of_songs = soup.find_all('div', class_='chart-list-item')
+    print("{} items scraped".format(len(list_of_songs) + 1))
+    for each_song in list_of_songs:
+        rank = each_song.select("div.chart-list-item__rank")[0].string.strip()  # Rank
+        song_name = each_song.select("span.chart-list-item__title-text")[0].string.strip()  # Song name
+        if each_song.select("div.chart-list-item__artist")[0].select('a'):
+            artist = each_song.select("div.chart-list-item__artist")[0].select('a')[0].string.strip()  # Artist name
         else:
-            artist = each_article.select("span.chart-row__artist")[0].string.strip()  # Artist name
-        # album = 'no album' # Album name
+            artist = each_song.select("div.chart-list-item__artist")[0].string.strip()
         dic = {
             'rank': rank,
             'song_name': song_name,
             'artist': artist
             # 'album' : album
         }
+        print(dic)
         dataRows.append(dic)
 
     with open('data.json', 'w') as outfile:
         json.dump(dataRows, outfile)
-    print "\033[95m Data JSON is extracted \033[0m"
+    print("\033[95m Data JSON is extracted \033[0m")
 
     playlistid = []
     for item in dataRows:
         query = youtube_search({"q": "%s %s" % (item["song_name"], item["artist"]), "maxResults": "1"})
-        print query
+        print(query)
         if query:
             playlistid.append(query)
             # print "VideoID id added"
-    print "\033[94m Video JSON is extracted \033[0m"
+    print("\033[94m Video JSON is extracted \033[0m")
 
     with open('playlist.json', 'w') as outfile:
         json.dump(playlistid, outfile)
