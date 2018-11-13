@@ -26,10 +26,14 @@ def getchart():
 
     # ==== Get First Song =====
     first_song = soup.find('div', class_='chart-number-one__info')
+    if first_song.select("div.chart-number-one__artist")[0].select('a'):
+        first_song_artist = first_song.select("div.chart-number-one__artist")[0].select('a')[0].string.strip()
+    else:
+        first_song_artist = first_song.select("div.chart-number-one__artist")[0].string.strip()
     first_dic = {
         'rank': 1,
         'song_name': first_song.select("div.chart-number-one__title")[0].string.strip(),
-        'artist': first_song.select("div.chart-number-one__artist")[0].string.strip()
+        'artist': first_song_artist
     }
     dataRows.append(first_dic)
 
