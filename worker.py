@@ -24,29 +24,15 @@ def getchart():
     html = r.text
     soup = BeautifulSoup(html, "html.parser")
 
-    # ==== Get First Song =====
-    first_song = soup.find('div', class_='chart-number-one__info')
-    if first_song.select("div.chart-number-one__artist")[0].select('a'):
-        first_song_artist = first_song.select("div.chart-number-one__artist")[0].select('a')[0].string.strip()
-    else:
-        first_song_artist = first_song.select("div.chart-number-one__artist")[0].string.strip()
-    first_dic = {
-        'rank': 1,
-        'song_name': first_song.select("div.chart-number-one__title")[0].string.strip(),
-        'artist': first_song_artist
-    }
-    dataRows.append(first_dic)
-
-    # ==== Get Next 99 Songs =====
-    list_of_songs = soup.find_all('div', class_='chart-list-item')
-    print("{} items scraped".format(len(list_of_songs) + 1))
+    # ==== Get 100 Songs =====
+    list_of_songs = soup.find_all('li', {"class": "chart-list__element"})
+    print(list_of_songs)
+    print("{} items scraped".format(len(list_of_songs)))
     for each_song in list_of_songs:
-        rank = each_song.select("div.chart-list-item__rank")[0].string.strip()  # Rank
-        song_name = each_song.select("span.chart-list-item__title-text")[0].string.strip()  # Song name
-        if each_song.select("div.chart-list-item__artist")[0].select('a'):
-            artist = each_song.select("div.chart-list-item__artist")[0].select('a')[0].string.strip()  # Artist name
-        else:
-            artist = each_song.select("div.chart-list-item__artist")[0].string.strip()
+        rank = each_song.select("span.chart-element__rank__number")[0].string.strip()  # Rank
+        song_name = each_song.select("span.chart-element__information__song")[0].string.strip()  # Song name
+        artist = each_song.select("span.chart-element__information__artist")[0].string.strip()  # Artist name
+
         dic = {
             'rank': rank,
             'song_name': song_name,
@@ -66,7 +52,6 @@ def getchart():
         print(query)
         if query:
             playlistid.append(query)
-            # print "VideoID id added"
     print("\033[94m Video JSON is extracted \033[0m")
 
     with open('playlist.json', 'w') as outfile:
@@ -75,6 +60,7 @@ def getchart():
     del dataRows[0:len(dataRows)]
     s.enter(21600, 1, getchart, ())  # 86400 #43200 21600
     s.run()
+
 
 if __name__ == "__main__":
     s = sched.scheduler(time.time, time.sleep)
